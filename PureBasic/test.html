@@ -1,0 +1,80 @@
+<!DOCTYPE html>                                         
+<html lang='en' class='uk-height-1-1 uk-notouch'>       
+<head>                                                  
+<meta http-equiv='X-UA-Compatible' content='IE=edge'>   
+<meta name='viewport' content='width=device-width, initial-scale=1'>                                           
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/uikit/2.24.3/css/uikit.min.css' />         
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/uikit/2.24.3/css/uikit.gradient.min.css' />
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>                      
+<script src='https://cdnjs.cloudflare.com/ajax/libs/uikit/2.24.3/js/uikit.min.js'></script>                    
+<script>                                                
+var PostToWebServer = function(e) {                     
+      if (e.type == 'contextmenu' || e.target.id=='#toolbar') e.preventDefault();  
+      if (e.target.id) event.stopPropagation();         
+      $.ajax({                                          
+         type: 'POST',                                  
+         url: 'http://localhost:6361',          
+         data: {                                        
+             'eventType':e.type                         
+            ,'eventWhich':e.which                       
+            ,'eventGadget':e.target.id                  
+            ,'nodeName':e.target.nodeName               
+            ,'nodeWidth':e.target.clientWidth           
+            ,'nodeHeight':e.target.clientHeight         
+            ,'mouseHitX':e.offsetX                      
+            ,'mouseHitY':e.offsetY                      
+         },                                             
+         dataType: 'json',                              
+         async:true                                     
+      })                                                
+      .done(function(data)                              
+      {                                                 
+         /**alert(data); /**/                           
+      })                                                
+   };                                                                                                             
+$(document).on({                                                                                                  
+   'mousedown mouseup click dblclick contextmenu' : PostToWebServer                                               
+});                                                                                                               
+$(document).on({ 'focus blur change' : PostToWebServer },'input');                                                
+</script>                                                                                                         
+</head>                                                                                                           
+<body class='uk-flex uk-flex-column uk-height-1-1'>                                                               
+   <div class='uk-flex' style='height:10px;cursor:n-resize'>                                                      
+      <div id='#border1' class='uk-block-secondary' style='width:10px;cursor:se-resize'></div>                    
+      <div id='#border2' class='uk-block-primary uk-flex-item-1'></div>                                           
+      <div id='#border3' class='uk-block-secondary' style='width:10px;cursor:sw-resize'></div>                    
+   </div>                                                                                                         
+   <div class='uk-flex uk-flex-item-1' >                                                                          
+      <div id='#border4' class='uk-block-primary' style='width:10px;cursor:w-resize'></div>                       
+      <div id='content' class='uk-flex-item-1'>                                                                   
+         <nav id='#toolbar' class='uk-navbar uk-navbar-attached'>                                                 
+            <ul class='uk-navbar-nav'><li class='uk-active'><a href='#'>File</a></li></ul>                        
+            <div class='uk-navbar-content uk-navbar-flip'>                                                        
+               <a id='#minimize' href='#' class='uk-icon-small uk-icon-minus-circle' style='color:gray'></a>      
+               <a id='#maxmimize' href='#' class='uk-icon-small uk-icon-chevron-circle-up' style='color:gray'></a>
+               <a id='#close' href='#' class='uk-icon-small uk-icon-times-circle' style='color:gray'></a>         
+            </div>                                                                                                
+         </nav>                                                                                                   
+         <div class='uk-panel uk-panel-box uk-panel-box-secondary uk-margin-left uk-margin-right uk-margin-top'>  
+         <form class='uk-form'>                                                                                   
+            <fieldset>                                                                                            
+               <legend>LOGIN</legend>                                                                             
+               <div class='uk-form-row'><input type='text' placeholder='Username'></div>                          
+               <div class='uk-form-row'><input type='password' placeholder='Password'></div>                      
+               <div class='uk-form-row'>                                                                          
+                  <button id='#connect' class='uk-button uk-button-large uk-button-primary uk-animation-hover     
+                     uk-animation-scale uk-animation-reverse'><i class='uk-icon-refresh uk-icon-spin'></i>&nbsp;Connect</button>       
+               </div>                                                                                             
+            </fieldset>                                                                                           
+         </form>                                                                                                  
+         </div>                                                                                                   
+      </div>                                                                                                      
+      <div id='#border5' class='uk-block-primary' style='width:10px;cursor:w-resize'></div>                       
+   </div>                                                                                                         
+   <div class='uk-flex' style='height:10px;cursor:n-resize'>                                                      
+      <div id='#border6' class='uk-block-secondary' style='width:10px;cursor:sw-resize'></div>                    
+      <div id='#border7' class='uk-block-primary uk-flex-item-1'></div>                                           
+      <div id='#border8' class='uk-block-secondary' style='width:10px;cursor:se-resize'></div>                    
+   </div>                                                                                                         
+</body>                                                                                                           
+</html>

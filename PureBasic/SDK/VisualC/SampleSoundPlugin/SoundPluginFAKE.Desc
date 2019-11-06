@@ -1,0 +1,25 @@
+; Langage used to code the library: ASM or C
+;
+C
+
+; Number of windows DLL than the library need
+;
+0
+
+; Library type (Can be OBJ or LIB)
+;
+LIB
+
+; Number of PureBasic library needed by the library
+;
+1
+SoundPlugin
+
+; Help directory name
+;
+SoundPlugin
+
+; Library functions (FunctionName, Arg1, Arg2, ...)
+;
+UseFAKESoundDecoder () - Enables the FAKE support for CatchSound(), LoadSound().
+None

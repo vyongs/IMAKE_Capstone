@@ -1,0 +1,80 @@
+;
+;     Library library documentation - MultiOS version !
+;
+;       Done by AlphaSND - (c) Fantaisie Software
+;
+
+@Library Library
+
+@Overview
+
+Libraries are shared OS components which contain specific functions available to the programmer. For example,
+a library can contains commands to handle and manipulate pictures easily. Each OSes provide a number of
+shared libraries to ease the programmer's life. With PureBasic, it's possible to use these third libraries
+easely and dynamically !
+
+@OS Windows
+@LineBreak
+@LineBreak
+Under Windows, these libraries are well know under the name 'DLL'.
+
+@CommandList
+
+@Example Windows Library.pb
+
+@SupportedOS Windows, AmigaOS, Linux
+
+;--------------------------------------------------------------------------------------------------------
+
+@Function CloseLibrary(#Library)
+
+@Description
+  Close the specified #Library and free the memory previously allocated.
+  
+@SupportedOS Windows, AmigaOS, Linux
+
+;--------------------------------------------------------------------------------------------------------
+
+@Function Result = CallFunction(#Library, FunctionName$ [,Parameter1 [, Parameter2...]])
+
+@Description
+  Call a function in the specified #Library, previously opened with @Link OpenLibrary(), by using its name. Any numbers of paremeters can
+  be specified but it must fit the number of parameters needed by the function. For example, if a function
+  needs 2 paramaters, then 2 parameters must be passed, even if the 2 values are null. 
+  'Result' contains the result of the called function.
+  
+@SupportedOS Windows, AmigaOS, Linux
+
+;--------------------------------------------------------------------------------------------------------
+
+@Function Result = CallFunctionFast(*FunctionPointer [,Parameter1 [, Parameter2...]])
+
+@Description
+  Call a library function by using its pointer previously got with @Link IsFunction(). This is the fastest way to achieve it. Any numbers can
+  be specified but it must fit the number of parameters needed by the function. For example, if a function
+  needs 2 paramaters, then 2 parameters must be passed after the function pointer, even if the 2 values
+  are null. 'Result' contains the result of the called function.
+  
+@SupportedOS Windows, AmigaOS, Linux
+
+;--------------------------------------------------------------------------------------------------------
+
+@Function Result = IsFunction(#Library, FunctionName$)
+
+@Description
+  Check if the #Library, previously opened with @Link OpenLibrary(), contains the given function.
+  Warning, the function name is always case sensitive. If the 'Result' is 0 then the function isn't found, else
+  it returns a pointer to the function, useful for using with @Link CallFunctionFast().
+  
+@SupportedOS Windows, AmigaOS, Linux
+
+;--------------------------------------------------------------------------------------------------------
+
+@Function Result = OpenLibrary(#Library, Filename$)
+
+@Description
+  Open the specified library. If the 'Result' is 0, then the library can't be opened (library not
+  found or corrupted).
+
+@SupportedOS Windows, AmigaOS, Linux
+

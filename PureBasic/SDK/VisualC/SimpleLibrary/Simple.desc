@@ -1,0 +1,37 @@
+; Langage used to code th library: ASM or C
+;
+C
+
+; Number of windows DLL than the library need
+;
+0
+
+; Library type (Can be OBJ or LIB)
+;
+LIB
+
+; Number of PureBasic library needed by the library
+;
+0
+
+; Help directory name
+;
+Simple
+
+;
+; Library functions (FunctionName, Arg1, Arg2, ...)
+;
+InitSimple
+InitFunction
+
+FreeSimples
+EndFunction
+
+MessageBox, Long, String, String, Long, (WindowHandle, Body$, Title$, Flags) - Display an MessageBox
+Long | DebuggerCheck | Unicode
+
+StringMultiply, String, Long, (Text$, NbTimes) - Duplicate the given Text$
+String | DebuggerCheck | Unicode
+
+FloatReturn, () - Returns a float
+Float

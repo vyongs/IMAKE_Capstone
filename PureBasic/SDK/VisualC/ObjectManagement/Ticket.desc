@@ -1,0 +1,38 @@
+; Langage used to code th library: ASM or C
+;
+C
+
+; Number of windows DLL than the library need
+;
+0
+
+; Library type (Can be OBJ or LIB)
+;
+LIB
+
+; Number of PureBasic library needed by the library
+;
+1
+Object
+
+; Help directory name
+;
+Ticket
+
+;
+; Library functions (FunctionName, Arg1, Arg2, ...)
+;
+InitTicket
+InitFunction
+
+FreeTicket, Long, (#Ticket) - Free the specified ticket
+None | DebuggerCheck
+
+FreeTickets
+EndFunction
+
+CreateTicket, Long, Long, [Long], (#Ticket, Value [, Flags]) - Add a new ticket
+Long | DebuggerCheck
+
+DisplayTicket, Long, (#Ticket) - Display the specific ticket
+None | DebuggerCheck

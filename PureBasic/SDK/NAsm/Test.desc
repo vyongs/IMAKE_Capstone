@@ -1,0 +1,20 @@
+;
+; Langage used to code th library: ASM or C
+ASM
+;
+; Number of windows DLL than the library need
+0
+; Library type (Can be OBJ or LIB)
+;
+OBJ
+;
+; Number of PureBasic library needed by the library
+0
+; Help directory name
+;
+Test
+;
+; Library functions (FunctionName, Arg1, Arg2, ...)
+;
+MessageBox, Long, String, String, Long
+Long

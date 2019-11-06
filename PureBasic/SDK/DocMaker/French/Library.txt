@@ -1,0 +1,81 @@
+;
+;     Library library documentation - MultiOS version !
+;
+;       Done by AlphaSND - (c) Fantaisie Software
+;       and F.Weil (fw@nasca.fr)
+;
+
+@Library Library
+
+@Overview
+
+Les librairies sont des composants partagés du système d'exploitation contenant des fonctions spécifiques à l'intention des programmeurs. Par exemple,
+une librairie peut contenir des commandes pour traiter et manipuler facilement des images. Chaque système d'exploitation a ses propres librairies
+partagées pour faciliter la vie du programmeur. Avec PureBasic, il est possible d'utiliser ces librairies tierces facilement et dynamiquement !
+
+@OS Windows
+@LineBreak
+@LineBreak
+Sous Windows, ces librairies sont bien connues sous le nom de 'DLL'.
+
+@CommandList
+
+@Example Windows Library.pb
+
+@SupportedOS Windows, AmigaOS, Linux
+
+;--------------------------------------------------------------------------------------------------------
+
+@Function CloseLibrary(#Librairie)
+
+@Description
+  Ferme #librairie spécifiée et libère la mémoire préalablement allouée..
+  
+@SupportedOS Windows, AmigaOS, Linux
+
+;--------------------------------------------------------------------------------------------------------
+
+@Function Resultat = CallFunction(#Librairie, NomFonction$ [,Parametre1 [, Parametre2...]])
+
+@Description
+  Appelle une fonction de la #Librairie spécifiée, préalablement ouverte avec @Link OpenLibrary(), en utilisant son nom. Le nombre
+  de paramètres autorisés est quelconque mais doit correspondre exactement aux besoins de la fonction. Par exemple, si une fonction
+  nécessite 2 paramètres, alors 2 paramètres doivent être passés même si les valeurs de ces 2 paramètres sont nulles. 'Resultat'
+  contient le résultat de la fonction appelée.
+  
+@SupportedOS Windows, AmigaOS, Linux
+
+;--------------------------------------------------------------------------------------------------------
+
+@Function Resultat = CallFunctionFast(*PointeurFonction [,Parametre1 [, Parametre2...]])
+
+@Description
+  Appelle une fonction en librairie en utilisant son pointeur obtenu par @Link IsFunction(). Cette méthode est plus rapide.
+  Le nombre de paramètres autorisés est quelconque mais doit correspondre exactement aux besoins de la fonction. Par exemple,
+  si une fonction nécessite 2 paramètres, alors 2 paramètres doivent être passés même si les valeurs de ces 2 paramètres
+  sont nulles. 'Resultat' contient le résultat de la fonction appelée.
+  
+@SupportedOS Windows, AmigaOS, Linux
+
+;--------------------------------------------------------------------------------------------------------
+
+@Function Resultat = IsFunction(#Librairie, NomFonction$)
+
+@Description
+  Vérifie si #Library, préalablement ouverte avec @Link OpenLibrary(), contient la fonction spécifiée.
+  Attention, le nom de la fonction est toujours sensible à la casse. Si 'Résultat' est à 0 alors la fonction
+  n'a pas été trouvée, sinon on récupère le pointeur vers la fonction, ce qui est pratique pour l'utiliser
+  avec @Link CallFunctionFast().
+  
+@SupportedOS Windows, AmigaOS, Linux
+
+;--------------------------------------------------------------------------------------------------------
+
+@Function Resultat = OpenLibrary(#Librairie, NomFichier$)
+
+@Description
+  Ouvre la librairie spécifiée. Si 'Resultat' est à 0, alors la librairie n'a pu être ouverte (absente ou est
+  corrompue).
+
+@SupportedOS Windows, AmigaOS, Linux
+

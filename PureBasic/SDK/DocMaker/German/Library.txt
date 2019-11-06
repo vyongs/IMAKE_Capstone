@@ -1,0 +1,84 @@
+;
+;     Library library documentation - MultiOS version !
+;
+;       Done by AlphaSND - (c) Fantaisie Software
+;
+
+@Library Library
+
+@Overview
+
+  Libaries (Befehls-Bibliotheken) sind "shared" (zur Benutzung mit verschiedenen Applikationen freigegebene)
+  OS-Komponenten, die dem Programmierer spezielle Funktionen anbieten. Zum Beispiel kann eine Library Befehle
+  zum einfachen Handhaben und Manipulieren von Bildern enthalten. Jedes OS bietet eine Anzahl an "shared"
+  Libraries, um das Programmierer-Leben zu vereinfachen. Mit PureBasic ist es möglich, diese Libraries
+  einfach und dynamisch zu benutzen !
+
+@OS Windows
+@LineBreak
+@LineBreak
+  Unter Windows sind diese Libraries gut bekannt unter dem Namen 'DLL'.
+
+@CommandList
+
+@Example Windows Library.pb
+
+@SupportedOS Windows, AmigaOS, Linux
+
+;--------------------------------------------------------------------------------------------------------
+
+@Function CloseLibrary(#Library)
+
+@Description
+  Schließt die angegebene #Library und gibt den zuvor reservierten Speicher frei.
+  
+@SupportedOS Windows, AmigaOS, Linux
+
+;--------------------------------------------------------------------------------------------------------
+
+@Function Result = CallFunction(#Library, FunctionName$ [,Parameter1 [, Parameter2...]])
+
+@Description
+  Ruft eine Funktion in der angegebenen #Library, die zuvor mittels @Link OpenLibrary() geöffnet wurde,
+  anhand ihres Namens 'FunctionName$' auf. Eine beliebige Anzahl an Parametern kann angegeben werden,
+  muss aber mit der von der Funktion benötigten Anzahl übereinstimmen. Zum Beispiel, wenn eine Funktion
+  2 Parameter benötigt, müssen 2 Parameter angegeben werden, auch wenn diese 2 Werte gleich null sind.
+  'Result' enthält das Ergebnis der aufgerufenen Funktion.
+  
+@SupportedOS Windows, AmigaOS, Linux
+
+;--------------------------------------------------------------------------------------------------------
+
+@Function Result = CallFunctionFast(*FunctionPointer [,Parameter1 [, Parameter2...]])
+
+@Description
+  Ruft eine Library-Funktion mittels ihres Zeigers '*FunctionPointer', der zuvor mit @Link IsFunction()
+  ermittelt wurde, auf. Dies ist die schnellste Möglichkeit hierfür. Eine beliebige Anzahl an Parametern
+  kann angegeben werden, muss aber mit der von der Funktion benötigten Anzahl übereinstimmen. Zum Beispiel,
+  wenn eine Funktion 2 Parameter benötigt, müssen 2 Parameter angegeben werden, auch wenn diese 2 Werte
+  gleich null sind. 'Result' enthält das Ergebnis der aufgerufenen Funktion.
+  
+@SupportedOS Windows, AmigaOS, Linux
+
+;--------------------------------------------------------------------------------------------------------
+
+@Function Result = IsFunction(#Library, FunctionName$)
+
+@Description
+  Überprüft, ob die angegebene '#Library', welche zuvor mit @Link OpenLibrary() geöffnet wurde, die 
+  angegebene Funktion 'FunctionName$' enthält. Achtung, diese Funktion arbeitet immer "case-sensitive"
+  (achtet auf Groß- und Kleinschreibung). Ist das Ergebnis 'Result' gleich 0, dann wurde die Funktion
+  nicht gefunden. Andernfalls wird ein Zeiger (Pointer) auf die Funktion zurückgegeben, nützlich in
+  Verbindung mit @Link CallFunctionFast().
+  
+@SupportedOS Windows, AmigaOS, Linux
+
+;--------------------------------------------------------------------------------------------------------
+
+@Function Result = OpenLibrary(#Library, DateiName$)
+
+@Description
+  Öffnet die angegebene Library. Ist das 'Ergebnis' gleich 0, dann konnte die Library nicht geöffnet
+  werden (die Library wurde nicht gefunden oder ist korrupt).
+
+@SupportedOS Windows, AmigaOS, Linux

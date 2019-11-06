@@ -1,0 +1,4 @@
+; PureBasic DLL import file
+;
+PUREBASIC.DLL
+EasyRequester 1

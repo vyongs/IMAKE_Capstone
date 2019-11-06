@@ -1,0 +1,17 @@
+;
+; Keywords used for PureUnit
+;
+; Set this as "Custom Keywords file" in the IDE preferences and you can
+; hilight and case-correct the PureUnit keywords.
+;
+PureUnitOptions
+ProcedureUnit
+ProcedureUnitStartup
+ProcedureUnitShutdown
+ProcedureUnitBefore
+ProcedureUnitAfter
+EndProcedureUnit
+Assert
+AssertString
+Fail
+UnitDebug

@@ -1,0 +1,21 @@
+;
+; Langage used to code th library: ASM or C
+ASM
+;
+; Number of windows DLL than the library need
+0
+; Library type (Can be OBJ or LIB)
+;
+OBJ
+;
+; Number of PureBasic library needed by the library
+1
+Gadget
+; Help directory name
+;
+Gadget
+;
+; Library functions (FunctionName, Arg1, Arg2, ...)
+;
+ComboBoxGadgetTest, Long, Word, Word, Word, Word, [Long], (#Gadget, x, y, Width, Heigth [, Flags]) - Create a combobox gadget in the current GadgetList.
+Long
