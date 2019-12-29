@@ -1,4 +1,6 @@
-﻿;Garden
+﻿IncludePath "C:\Users\Administrator.DESKTOP-78MI24B\Documents\GitHub\IMAKE_Capstone\OpenCV_3.4.1_WIN_32_SRC_(world)"
+IncludeFile "cv_webcam_detect_hand.pb"
+;Garden
 
 EnableExplicit
 
@@ -193,7 +195,7 @@ Procedure GameLoad() ; 함수 정의
       ; x-왼쪽, 오른쪽 이동 / z -앞, 뒤 이동 
       
      
-      Debug WindowMouseX(myWindow)  + WindowMouseY(myWindow)
+      ;Debug WindowMouseX(myWindow)  + WindowMouseY(myWindow)
       
       FlipBuffers()  
       RenderGame3D()
@@ -236,7 +238,7 @@ Procedure Exit()
   End
 EndProcedure
 ; IDE Options = PureBasic 5.70 LTS (Windows - x86)
-; CursorPosition = 221
-; FirstLine = 207
+; CursorPosition = 84
+; FirstLine = 57
 ; Folding = --
 ; EnableXP
