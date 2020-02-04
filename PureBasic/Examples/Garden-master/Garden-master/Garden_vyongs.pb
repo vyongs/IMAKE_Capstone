@@ -1,4 +1,4 @@
-﻿IncludePath "C:\Users\Administrator.DESKTOP-78MI24B\Documents\GitHub\IMAKE_Capstone\OpenCV_3.4.1_WIN_32_SRC_(world)"
+﻿IncludePath "C:\Users\jecyo\Documents\GitHub\IMAKE_Capstone\OpenCV_3.4.1_WIN_32_SRC_(world)"
 IncludeFile "cv_webcam_detect_hand.pb"
 ;Garden
 
@@ -238,7 +238,6 @@ Procedure Exit()
   End
 EndProcedure
 ; IDE Options = PureBasic 5.70 LTS (Windows - x86)
-; CursorPosition = 84
-; FirstLine = 57
+; CursorPosition = 3
 ; Folding = --
 ; EnableXP

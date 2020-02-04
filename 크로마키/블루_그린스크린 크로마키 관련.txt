@@ -1,0 +1,4 @@
+블루/그린스크린 크로마키 관련
+
+Blue or Green Screen Effect with OpenCV [Chroma keying]
+https://medium.com/fnplus/blue-or-green-screen-effect-with-open-cv-chroma-keying-94d4a6ab2743

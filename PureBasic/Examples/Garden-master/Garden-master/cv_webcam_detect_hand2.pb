@@ -1,4 +1,4 @@
-IncludePath "C:\Users\Administrator.DESKTOP-78MI24B\Documents\GitHub\IMAKE_Capstone\OpenCV_3.4.1_WIN_32_SRC_(world)"
+IncludePath "C:\Users\jecyo\Documents\GitHub\IMAKE_Capstone\OpenCV_3.4.1_WIN_32_SRC_(world)"
 IncludeFile "includes/cv_functions.pbi"
 ;IncludePath "C:\Users\Administrator.DESKTOP-78MI24B\Documents\GitHub\IMAKE_Capstone\OpenCV_3.4.1_WIN_32_SRC_(world)\binaries"
 
@@ -418,7 +418,6 @@ Procedure xyExtract()
   EndIf ; 가장 큰 if 끝
  EndProcedure
 ; IDE Options = PureBasic 5.70 LTS (Windows - x86)
-; CursorPosition = 281
 ; Folding = A-
 ; EnableXP
 ; DisableDebugger

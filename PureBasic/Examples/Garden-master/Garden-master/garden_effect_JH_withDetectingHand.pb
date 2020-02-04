@@ -1,4 +1,4 @@
-﻿IncludePath "C:\Users\Administrator.DESKTOP-78MI24B\Documents\GitHub\IMAKE_Capstone\OpenCV_3.4.1_WIN_32_SRC_(world)"
+﻿IncludePath "C:\Users\jecyo\Documents\GitHub\IMAKE_Capstone\OpenCV_3.4.1_WIN_32_SRC_(world)"
 IncludeFile "includes/cv_functions.pbi"
 
 Global lpPrevWndFunc
@@ -813,6 +813,5 @@ Procedure Exit()
   End
 EndProcedure
 ; IDE Options = PureBasic 5.70 LTS (Windows - x86)
-; CursorPosition = 383
-; Folding = HA-
+; Folding = XA-
 ; EnableXP
