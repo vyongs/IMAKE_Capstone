@@ -77,6 +77,8 @@ while not done:
             if animal_now=='horse':
                 animal_now='cat'
             elif animal_now=='cat':
+                animal_now='bird'
+            elif animal_now=='bird':
                 animal_now='horse'
 
     
