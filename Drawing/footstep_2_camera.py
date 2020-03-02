@@ -1,6 +1,6 @@
 import sys
 import pygame
-import _0217_template_match as detect
+import TM as detect
 import cv2 as cv
 
 cap = cv.VideoCapture(0)
