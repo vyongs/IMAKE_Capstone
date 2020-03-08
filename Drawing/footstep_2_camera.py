@@ -201,7 +201,7 @@ while not done:
     if spill_y==0:
         screen.blit(bucket_1,(bucket_y[0]-int(paints_size/2),bucket_y[1]-int(paints_size/2)))
     else:
-        screen.blit(paints_y,(yellow[0]-int(paints_size/2),yellow[1]-int(paints_size/2)))
+        #screen.blit(paints_y,(yellow[0]-int(paints_size/2),yellow[1]-int(paints_size/2)))
         screen.blit(bucket_2,(bucket_y[0]-int(paints_size/2),bucket_y[1]-int(paints_size/2)))
         spill_y+=1
         if spill_y==20:
