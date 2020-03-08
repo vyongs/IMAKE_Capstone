@@ -53,7 +53,8 @@ paints_y=pygame.transform.scale(imgRoad('paints_y'),(paints_size,paints_size))
 paints_g=pygame.transform.scale(imgRoad('paints_g'),(paints_size,paints_size))
 paints_s=pygame.transform.scale(imgRoad('paints_s'),(paints_size,paints_size))
 paints_p=pygame.transform.scale(imgRoad('paints_p'),(paints_size,paints_size))
-eraser_img=pygame.transform.scale(imgRoad('eraser'),(paints_size,paints_size))
+broom_1=pygame.transform.scale(imgRoad('broom1'),(67,116))
+broom_2=pygame.transform.scale(imgRoad('broom2'),(89,143))
 
 bucket_y_img=pygame.transform.scale(imgRoad('bucket_y'),(paints_size,paints_size))
 bucket_g_img=pygame.transform.scale(imgRoad('bucket_g'),(paints_size,paints_size))
@@ -104,7 +105,7 @@ bucket_s=(380,500)
 skyblue=(450,500)
 pink=(650,500)
 bucket_p=(580,500)
-eraser=(750,100)
+broom=(750,100)
 
 distance=40
 
@@ -194,8 +195,8 @@ while not done:
             color_now='time_over'
             time=0
             
-    # eraser img
-    screen.blit(eraser_img,(eraser[0]-int(paints_size/2),eraser[1]-int(paints_size/2)))
+    # broom img
+    screen.blit(broom_1,(broom[0]-int(67/2),broom[1]-int(116/2)))
 
     # draw stand up/spilled paint bucket depending on 'spill_' bool
     if spill_y==0:#YELLO
@@ -242,11 +243,13 @@ while not done:
         if spill_p==20:
             spill_p=0
 
-    # ERASER
-    if -distance<pos_now[0]-eraser[0]<distance and -distance<pos_now[1]-eraser[1]<distance:
+    # ERASE
+    if check_collision(broom,pos_now,distance):
         mousepos.clear()
         animals.clear()
         opacity.clear()
+        screen.blit(broom_2,(broom[0]-int(89/2),broom[1]-int(143/2)))
+        
 
     # user img
     flower = pygame.transform.scale(flower, (flower_size, flower_size))
@@ -267,12 +270,6 @@ while not done:
         drawObject(animals[i],mousepos[i],opacity[i])
 
     
-    '''
-    screen.blit(paints_g,(green[0]-int(paints_size/2),green[1]-int(paints_size/2)))
-    screen.blit(paints_s,(skyblue[0]-int(paints_size/2),skyblue[1]-int(paints_size/2)))
-    screen.blit(paints_p,(pink[0]-int(paints_size/2),pink[1]-int(paints_size/2)))
-    pygame.draw.circle(screen,(255,255,255),eraser,30)
-    '''
     
     pygame.display.update()
     
