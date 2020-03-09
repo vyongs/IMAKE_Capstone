@@ -2,6 +2,7 @@ import sys
 import pygame
 import TM as detect
 import cv2 as cv
+import random
 
 cap = cv.VideoCapture(0)
 
@@ -113,6 +114,9 @@ distance=40
 pos_prev = (60, 60)
 pos_now = (60, 60)
 
+X=0
+Y=0
+
 while not done:
     clock.tick(10)
     if flag==0:
@@ -190,8 +194,8 @@ while not done:
     
     if time>0:
         time+=1
-        opacity_now-=15
-        if time==20:
+        opacity_now-=10
+        if time==30:
             color_now='time_over'
             time=0
             
@@ -207,9 +211,13 @@ while not done:
     else :
         screen.blit(bucket_y_3,(bucket_y[0]-int(paints_size/2),bucket_y[1]-int(paints_size/2)))
         spill_y+=1
-        if spill_y==20:
+        if spill_y>20:
             spill_y=0
-        
+            X=random.randint(50,750)
+            Y=random.randint(50,550)
+            yellow=(X,Y)
+            bucket_y=(yellow[0]-70,yellow[1])
+    
     if spill_g==0:#GREEN
         screen.blit(bucket_g_img,(bucket_g[0]-int(paints_size/2),bucket_g[1]-int(paints_size/2)))
     elif spill_g>0 and spill_g<3:
@@ -218,9 +226,13 @@ while not done:
     else :
         screen.blit(bucket_g_3,(bucket_g[0]-int(paints_size/2),bucket_g[1]-int(paints_size/2)))
         spill_g+=1
-        if spill_g==20:
+        if spill_g>20:
             spill_g=0
-
+            X=random.randint(120,750)
+            Y=random.randint(120,550)
+            green=(X,Y)
+            bucket_g=(green[0]-70,green[1])
+    
     if spill_s==0:#SKYBLUE
         screen.blit(bucket_s_img,(bucket_s[0]-int(paints_size/2),bucket_s[1]-int(paints_size/2)))
     elif spill_s>0 and spill_s<3:
@@ -229,9 +241,13 @@ while not done:
     else :
         screen.blit(bucket_s_3,(bucket_s[0]-int(paints_size/2),bucket_s[1]-int(paints_size/2)))
         spill_s+=1
-        if spill_s==20:
+        if spill_s>20:
             spill_s=0
-
+            X=random.randint(50,750)
+            Y=random.randint(50,550)
+            skyblue=(X,Y)
+            bucket_s=(skyblue[0]-70,skyblue[1])
+    
     if spill_p==0:#PINK
         screen.blit(bucket_p_img,(bucket_p[0]-int(paints_size/2),bucket_p[1]-int(paints_size/2)))
     elif spill_p>0 and spill_p<3:
@@ -240,8 +256,12 @@ while not done:
     else :
         screen.blit(bucket_p_3,(bucket_p[0]-int(paints_size/2),bucket_p[1]-int(paints_size/2)))
         spill_p+=1
-        if spill_p==20:
+        if spill_p>20:
             spill_p=0
+            X=random.randint(50,750)
+            Y=random.randint(50,550)
+            pink=(X,Y)
+            bucket_p=(pink[0]-70,pink[1])
 
     # ERASE
     if check_collision(broom,pos_now,distance):
