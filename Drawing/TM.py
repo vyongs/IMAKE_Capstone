@@ -19,7 +19,7 @@ for i in animal_init:
     footstep[i+'_s']=Image.open(i+'_s.png')
     footstep[i+'_p']=Image.open(i+'_p.png')
 
-def vyongs_detect(template_file_name, threshold, b,g,r,area,point,img):
+def vyongs_detect(template_file_name, threshold, b,g,r,area,img):
     global R,flag,XY,touch,touch2,flag1,flag2,r1,r2,limit
 
     img_gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)

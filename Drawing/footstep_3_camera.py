@@ -5,6 +5,8 @@ import cv2 as cv
 import random
 
 cap = cv.VideoCapture(0)
+cap.set(3,800)
+cap.set(4,600)
 
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
@@ -151,8 +153,8 @@ while not done:
     if ret == False:
         continue
     
-    points = detect.vyongs_detect('circle.jpg', 0.5,  255,0,0,"head",(300,100),img)
-
+    points = detect.vyongs_detect('circle.jpg', 0.6,  255,0,0,"head",img)
+    
     cv.imshow('result', img)
     # if person head is found
     if type(points) is tuple:
