@@ -158,7 +158,7 @@ while not done:
     if type(points) is tuple:
         pos_now = points
 
-    pos_now=pygame.mouse.get_pos()
+    #spos_now=pygame.mouse.get_pos()
 
         # check if user collided to buckets
     if check_collision(bucket_y,pos_now,distance):
