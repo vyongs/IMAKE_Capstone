@@ -45,10 +45,13 @@ def imgRoad(name):
 def drawObject(animal, XY, opacity):
     blit_alpha(screen,animal, XY,opacity)
 
+#user image
 flower=pygame.image.load('flower.png')
 flower_size=50
 flower = pygame.transform.scale(flower, (flower_size, flower_size))
-flag=0
+#blink=pygame.image.load('blink.png')
+#blink_opacity=100
+flag=1
 
 # PAINT IMG
 paints_size=80
@@ -118,17 +121,12 @@ pos_now = (60, 60)
 
 X=0
 Y=0
+X2=0
+Y2=0
 
 while not done:
     clock.tick(10)
-    if flag==0:
-        flower_size-=5
-        if flower_size==10:
-            flag=1
-    else:
-        flower_size+=5
-        if flower_size==50:
-            flag=0
+
     
     for event in pygame.event.get(): 
         if event.type == pygame.QUIT:  
@@ -275,8 +273,23 @@ while not done:
         
 
     # user img
-    flower = pygame.transform.scale(flower, (flower_size, flower_size))
-    screen.blit(flower,(pos_now[0]-int(flower_size/2),pos_now[1]-int(flower_size/2)))
+    
+    #screen.blit(flower,(pos_now[0]-int(flower_size/2),pos_now[1]-int(flower_size/2)))
+    if flag==1:
+        X=random.randint(0,40)
+        Y=random.randint(0,40)
+
+    screen.blit(imgRoad('blink'+str(flag)),(pos_now[0]-X,pos_now[1]-Y))
+
+    if flag==4:
+        X2=random.randint(0,40)
+        Y2=random.randint(0,40)
+    screen.blit(imgRoad('blink'+str(flag-3 if flag>3 else flag+5)),(pos_now[0]-X2,pos_now[1]-Y2))
+
+    if flag==8:
+        flag=0
+        
+    flag+=1
 
     # if user did not touch any bucket yet, no footstep printing
     if color_now is None:
