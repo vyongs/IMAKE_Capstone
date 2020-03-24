@@ -4,7 +4,7 @@ import TM as detect
 import cv2 as cv
 import random
 
-cap = cv.VideoCapture(0)
+cap = cv.VideoCapture(1)
 cap.set(3,800)
 cap.set(4,600)
 
@@ -136,6 +136,7 @@ while not done:
             
         #마우스 클릭시 동물이 바뀜
         elif event.type== pygame.MOUSEBUTTONDOWN:
+            print(pos_prev)
             if animal_now=='horse':
                 animal_now='cat'
             elif animal_now=='cat':
@@ -158,6 +159,7 @@ while not done:
     cv.imshow('result', img)
     # if person head is found
     if type(points) is tuple:
+        points = (points[0]*1.3-181, points[1]*1.3-102) # change the location of points
         pos_now = points
 
     #spos_now=pygame.mouse.get_pos()

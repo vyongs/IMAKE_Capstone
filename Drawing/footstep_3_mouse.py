@@ -4,7 +4,7 @@ import TM as detect
 import cv2 as cv
 import random
 
-cap = cv.VideoCapture(0)
+cap = cv.VideoCapture(1)
 cap.set(3,800)
 cap.set(4,600)
 
