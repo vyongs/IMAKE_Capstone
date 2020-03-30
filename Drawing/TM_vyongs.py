@@ -3,8 +3,9 @@ import numpy as np
 from matplotlib import pyplot as plt
 import math
 from PIL import Image
-from scipy import ndimage
 import pygame
+
+cap = cv.VideoCapture(0)
 
 #methods = ['cv2.TM_CCOEFF','cv2.TM_CCOEFF_NORMED','cv2.TM_CCORR','cv2.TM_CCORR_NORMED','cv2.TM_SQDIFF','cv2.TM_SQDIFF_NORMED']
 method = 'TM_CCOEFF_NORMED'
@@ -17,35 +18,6 @@ for i in animal_init:
     footstep[i+'_g']=Image.open(i+'_g.png')
     footstep[i+'_s']=Image.open(i+'_s.png')
     footstep[i+'_p']=Image.open(i+'_p.png')
-
-user = (0,0) #initial point of user
-
-def jay_detect(background_img, frame):
-    this_img = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
-    this_img = cv.GaussianBlur(this_img, (5,5),0)      
-    abdiff = cv.absdiff(this_img, background_img)
-    thresh = cv.getTrackbarPos("Threshold","panel")
-    _, thresh_img = cv.threshold(abdiff, thresh, 255, cv.THRESH_BINARY)
-
-    '''
-    kernel2 = cv.getStructuringElement(cv.MORPH_ELLIPSE, (3, 3)) # array of 1s in circle shape
-    opening = cv.morphologyEx(thresh_img, cv.MORPH_OPEN, kernel2, 3) # remove noise
-    border = cv.dilate(opening, kernel2, iterations=3) # increases area (join broken parts)
-    # find the border of user
-    border = border - cv.erode(border, None) # erode: decrease area
-'''
-    temp = np.rot90(thresh_img)        
-    mask = np.flipud(temp)
-    
-    center_point = ndimage.measurements.center_of_mass(mask) # get center of border
-
-    try:
-        user = (int(center_point[0]),int(center_point[1])) # make (x,y) into int value
-        print(user)
-    except:     
-        user =(0,0)
-    
-    return user
 
 def vyongs_detect(template_file_name, threshold, b,g,r,area,img):
     global R,flag,XY,touch,touch2,flag1,flag2,r1,r2,limit
