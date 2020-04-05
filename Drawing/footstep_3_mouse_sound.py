@@ -4,12 +4,14 @@ import TM as detect
 import cv2 as cv
 import random
 
-cap = cv.VideoCapture(1)
-cap.set(cv.CAP_PROP_AUTOFOCUS, 0)
+cap = cv.VideoCapture(0)
 cap.set(3,800)
 cap.set(4,600)
 
+#initialization
 pygame.init()
+pygame.mixer.init()
+pygame.mixer.pre_init(44100,-16,2,512)
 screen = pygame.display.set_mode((800, 600))
 clock = pygame.time.Clock()
 
@@ -46,10 +48,13 @@ def imgRoad(name):
 def drawObject(animal, XY, opacity):
     blit_alpha(screen,animal, XY,opacity)
 
+#user image
 flower=pygame.image.load('flower.png')
 flower_size=50
 flower = pygame.transform.scale(flower, (flower_size, flower_size))
-flag=0
+#blink=pygame.image.load('blink.png')
+#blink_opacity=100
+flag=1
 
 # PAINT IMG
 paints_size=80
@@ -119,55 +124,12 @@ pos_now = (60, 60)
 
 X=0
 Y=0
+X2=0
+Y2=0
 
-def nothing(x):
-    pass
-
-cv.namedWindow("panel", cv.WINDOW_NORMAL)
-cv.createTrackbar("Threshold","panel", 0, 255, nothing)
-cv.resizeWindow("panel", 7, 100)
-
-runned = False
-thresh_done = False
-
-#background and tresh setting
-while not (runned and thresh_done):    
-    while runned == False: # capture bg
-        ret, frame = cap.read()
-        cv.imshow("original", frame)
-        if cv.waitKey(1) & 0xFF == ord('s'):
-            break
-        
-    ret, frame = cap.read()
-    
-    if thresh_done==False and runned == True:
-        
-        this_img = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
-        this_img = cv.GaussianBlur(this_img, (5,5),0)      
-        abdiff = cv.absdiff(this_img, background_img)
-        thresh = cv.getTrackbarPos("Threshold","panel")
-        _, thresh_img = cv.threshold(abdiff, thresh, 255, cv.THRESH_BINARY)
-        cv.imshow("threshimg",thresh_img)        
-        if cv.waitKey(1) & 0xFF == ord('d'):
-            print("---------THRESH DONE-----------")
-            thresh_done=True
-
-    if runned == False: # make bg into gray and blur the photo
-        background_img = cv.cvtColor(frame,cv.COLOR_BGR2GRAY)
-        background_img = cv.GaussianBlur(background_img, (5,5),0)
-        runned = True
-
-print("-----------PYGAME START------------")
 while not done:
     clock.tick(10)
-    if flag==0:
-        flower_size-=5
-        if flower_size==10:
-            flag=1
-    else:
-        flower_size+=5
-        if flower_size==50:
-            flag=0
+
     
     for event in pygame.event.get(): 
         if event.type == pygame.QUIT:  
@@ -175,7 +137,6 @@ while not done:
             
         #마우스 클릭시 동물이 바뀜
         elif event.type== pygame.MOUSEBUTTONDOWN:
-            print(pos_prev)
             if animal_now=='horse':
                 animal_now='cat'
             elif animal_now=='cat':
@@ -194,13 +155,11 @@ while not done:
         continue
     
     #points = detect.vyongs_detect('circle.jpg', 0.6,  255,0,0,"head",img)
-    points = detect.jay_detect(background_img, img)
-    #print(points)
-        
+    points=pygame.mouse.get_pos()
+    
     cv.imshow('result', img)
     # if person head is found
     if type(points) is tuple:
-        points = (points[0]*1.3-181, points[1]*1.3-102) # change the location of points
         pos_now = points
 
     #spos_now=pygame.mouse.get_pos()
@@ -314,11 +273,29 @@ while not done:
         animals.clear()
         opacity.clear()
         screen.blit(broom_2,(broom[0]-int(89/2),broom[1]-int(143/2)))
+        sfx1 = pygame.mixer.Sound('erase.ogg')
+        sfx1.set_volume(0.5)
+        sfx1.play()
         
 
     # user img
-    flower = pygame.transform.scale(flower, (flower_size, flower_size))
-    screen.blit(flower,(pos_now[0]-int(flower_size/2),pos_now[1]-int(flower_size/2)))
+    
+    #screen.blit(flower,(pos_now[0]-int(flower_size/2),pos_now[1]-int(flower_size/2)))
+    if flag==1:
+        X=random.randint(0,40)
+        Y=random.randint(0,40)
+
+    screen.blit(imgRoad('blink'+str(flag)),(pos_now[0]-X,pos_now[1]-Y))
+
+    if flag==4:
+        X2=random.randint(0,40)
+        Y2=random.randint(0,40)
+    screen.blit(imgRoad('blink'+str(flag-3 if flag>3 else flag+5)),(pos_now[0]-X2,pos_now[1]-Y2))
+
+    if flag==8:
+        flag=0
+        
+    flag+=1
 
     # if user did not touch any bucket yet, no footstep printing
     if color_now is None:
@@ -330,6 +307,10 @@ while not done:
         mousepos_count = len(mousepos)
         animals.append((detect.rotate_img(animal_now+color_now,mousepos[mousepos_count-2],mousepos[mousepos_count-1])))
         opacity.append(opacity_now)
+        sfx1 = pygame.mixer.Sound('step.ogg')
+        sfx1.set_volume(0.5)
+        sfx1.play()
+        
     # draw footsteps on screen
     for i in range(len(mousepos)):
         drawObject(animals[i],mousepos[i],opacity[i])
