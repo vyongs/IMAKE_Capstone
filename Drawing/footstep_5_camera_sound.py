@@ -8,7 +8,10 @@ cap = cv.VideoCapture(0)
 cap.set(3,800)
 cap.set(4,600)
 
+#initialization
 pygame.init()
+pygame.mixer.init()
+pygame.mixer.pre_init(44100,-16,2,512)
 screen = pygame.display.set_mode((800, 600))
 clock = pygame.time.Clock()
 
@@ -40,15 +43,15 @@ def check_spill(bucket_1,bucket_2,paints,spill,bucket,size,color):
             spill=0
 
 def imgRoad(name):
-    return pygame.image.load(name+'.png')
+    return pygame.image.load('sprites/'+name+'.png')
 
 def drawObject(animal, XY, opacity):
     blit_alpha(screen,animal, XY,opacity)
 
 #user image
-flower=pygame.image.load('flower.png')
-flower_size=50
-flower = pygame.transform.scale(flower, (flower_size, flower_size))
+#flower=pygame.image.load('flower.png')
+#flower_size=50
+#flower = pygame.transform.scale(flower, (flower_size, flower_size))
 #blink=pygame.image.load('blink.png')
 #blink_opacity=100
 flag=1
@@ -151,8 +154,8 @@ while not done:
     if ret == False:
         continue
     
-    #points = detect.vyongs_detect('circle.jpg', 0.6,  255,0,0,"head",img)
-    points=pygame.mouse.get_pos()
+    points = detect.hough_detect(img)
+    #points=pygame.mouse.get_pos()
     
     cv.imshow('result', img)
     # if person head is found
@@ -270,6 +273,9 @@ while not done:
         animals.clear()
         opacity.clear()
         screen.blit(broom_2,(broom[0]-int(89/2),broom[1]-int(143/2)))
+        sfx1 = pygame.mixer.Sound('sound/erase.ogg')
+        sfx1.set_volume(0.5)
+        sfx1.play()
         
 
     # user img
@@ -301,6 +307,10 @@ while not done:
         mousepos_count = len(mousepos)
         animals.append((detect.rotate_img(animal_now+color_now,mousepos[mousepos_count-2],mousepos[mousepos_count-1])))
         opacity.append(opacity_now)
+        sfx1 = pygame.mixer.Sound('sound/step.ogg')
+        sfx1.set_volume(0.5)
+        sfx1.play()
+        
     # draw footsteps on screen
     for i in range(len(mousepos)):
         drawObject(animals[i],mousepos[i],opacity[i])

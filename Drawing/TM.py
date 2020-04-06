@@ -13,33 +13,33 @@ method = 'TM_CCOEFF_NORMED'
 animal_init = ['horse','bird', 'cat']
 footstep = { }
 for i in animal_init:
-    footstep[i+'_y']=Image.open(i+'_y.png')
-    footstep[i+'_g']=Image.open(i+'_g.png')
-    footstep[i+'_s']=Image.open(i+'_s.png')
-    footstep[i+'_p']=Image.open(i+'_p.png')
+    footstep[i+'_y']=Image.open('sprites/'+i+'_y.png')
+    footstep[i+'_g']=Image.open('sprites/'+i+'_g.png')
+    footstep[i+'_s']=Image.open('sprites/'+i+'_s.png')
+    footstep[i+'_p']=Image.open('sprites/'+i+'_p.png')
 
 user = (0,0) #initial point of user
 
 
-def jay_detect(background_img, frame):
-    this_img = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
-    this_img = cv.GaussianBlur(this_img, (5,5),0)      
-    abdiff = cv.absdiff(this_img, background_img)
-    thresh = cv.getTrackbarPos("Threshold","panel")
-    _, thresh_img = cv.threshold(abdiff, thresh, 255, cv.THRESH_BINARY)
-
-    temp = np.rot90(thresh_img)        
-    mask = np.flipud(temp)
+def hough_detect(frame):
+    gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+    gray = cv.medianBlur(gray,5)
     
-    center_point = ndimage.measurements.center_of_mass(mask) # get center of border
+    circles = cv.HoughCircles(gray,cv.HOUGH_GRADIENT,1,150,param1=50,param2=35,minRadius=0,maxRadius=0)
+    if circles is not None:
+        for c in circles[0,:]:
 
-    try:
-        user = (int(center_point[0]),int(center_point[1])) # make (x,y) into int value
-        #print(user)
-    except:     
-        user =(0,0)
+            center = (c[0],c[1])
+            radius = c[2]
     
-    return user
+        # 바깥원
+            cv.circle(frame,center,radius,(0,255,0),2)
+    
+        # 중심원
+            cv.circle(frame,center,2,(0,0,255),3)
+    cv.imshow("real-time video", frame)
+    
+    return center
 
 
 def rotate_img(animal, pos1, pos2):            
@@ -84,8 +84,6 @@ def rotate_img(animal, pos1, pos2):
     #print(angle)
     result = pygame.image.fromstring(data,size,mode)
     return result
-    
-flower=cv.imread('flower.png')
     
 global R,flag,XY,touch,touch2,flag1,flag2,r1,r2,limit
 R=30
