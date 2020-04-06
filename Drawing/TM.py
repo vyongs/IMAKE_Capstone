@@ -35,7 +35,7 @@ def jay_detect(background_img, frame):
 
     try:
         user = (int(center_point[0]),int(center_point[1])) # make (x,y) into int value
-        print(user)
+        #print(user)
     except:     
         user =(0,0)
     
