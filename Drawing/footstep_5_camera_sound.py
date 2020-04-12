@@ -86,7 +86,7 @@ opacity=[]
 done=False #done game
 
 color_now=None
-animal_now='horse'
+animal_now='cat'
 opacity_now=300
 
 #spill time
@@ -307,9 +307,11 @@ while not done:
         mousepos_count = len(mousepos)
         animals.append((detect.rotate_img(animal_now+color_now,mousepos[mousepos_count-2],mousepos[mousepos_count-1])))
         opacity.append(opacity_now)
+        '''
         sfx1 = pygame.mixer.Sound('sound/step.ogg')
         sfx1.set_volume(0.5)
         sfx1.play()
+        '''
         
     # draw footsteps on screen
     for i in range(len(mousepos)):
