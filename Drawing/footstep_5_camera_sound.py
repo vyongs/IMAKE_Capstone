@@ -4,7 +4,7 @@ import TM as detect
 import cv2 as cv
 import random
 
-cap = cv.VideoCapture(1)
+cap = cv.VideoCapture(0)
 cap.set(3,800)
 cap.set(4,600)
 
@@ -101,6 +101,10 @@ spill_p=0
 #paint time
 time=0
 
+#guide window
+guide_count=0
+#guide_window=
+
 #color
 YELLOW=(255,255,0)
 GREEN=(0,255,0)
@@ -163,9 +167,13 @@ while not done:
     if type(points) is tuple:
         points = (points[0]*1.3-181, points[1]*1.3-102)
         pos_now = points
+        guide_count=0
     elif points is None:
         animal_flag += 1
         animal_now = animal_init[flag%3]
+        guide_count+=1
+    
+
 
         # check if user collided to buckets
     if check_collision(bucket_y,pos_now,distance):
@@ -228,7 +236,7 @@ while not done:
     if spill_g==0:#GREEN
         screen.blit(bucket_g_img,(bucket_g[0]-int(paints_size/2),bucket_g[1]-int(paints_size/2)))
     elif spill_g>0 and spill_g<3:
-        screen.blit(bucket_g_2,(bucket_g[0]-int(paints_size/2),bucket_g[1]-int(paints_size/2)))
+        screen.blit(bucket_g_2,(bucket_g[0]-int(paints_size/2),bucket_g[1]-int(paints_size/2)))  
         spill_g+=1
     else :
         screen.blit(bucket_g_3,(bucket_g[0]-int(paints_size/2),bucket_g[1]-int(paints_size/2)))
@@ -300,6 +308,12 @@ while not done:
 
     flag+=1
 
+    #guide window blit
+    if guide_count>=20:
+        screen.blit(imgRoad('guide_skyblue'),(100,100))
+    if (spill_y>0 and spill_y<20) or (spill_s>0 and spill_s<20) or (spill_g>0 and spill_g<20) or (spill_p>0 and spill_p<20):
+        screen.blit(imgRoad('guide_pink'),(100,100))
+        
     # if user did not touch any bucket yet, no footstep printing
     if color_now is None:
         pygame.display.update()
@@ -319,7 +333,6 @@ while not done:
     # draw footsteps on screen
     for i in range(len(mousepos)):
         drawObject(animals[i],mousepos[i],opacity[i])
-
     
     
     pygame.display.update()

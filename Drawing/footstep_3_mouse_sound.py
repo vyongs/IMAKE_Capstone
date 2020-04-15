@@ -297,6 +297,14 @@ while not done:
         
     flag+=1
 
+
+
+    #guide window blit
+
+    if (spill_y>0 and spill_y<20) or (spill_s>0 and spill_s<20) or (spill_g>0 and spill_g<20) or (spill_p>0 and spill_p<20):
+        screen.blit(imgRoad('guide_pink'),(100,100))
+        
+
     # if user did not touch any bucket yet, no footstep printing
     if color_now is None:
         pygame.display.update()
