@@ -86,7 +86,7 @@ opacity=[]
 done=False #done game
 
 color_now=None
-animal_now='horse'
+animal_now='cat'
 opacity_now=300
 
 #spill time
