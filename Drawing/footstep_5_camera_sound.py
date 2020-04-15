@@ -4,7 +4,7 @@ import TM as detect
 import cv2 as cv
 import random
 
-cap = cv.VideoCapture(0)
+cap = cv.VideoCapture(1)
 cap.set(3,800)
 cap.set(4,600)
 
@@ -79,6 +79,9 @@ bucket_g_2=pygame.transform.scale(imgRoad('bucket_g_2'),(paints_size,paints_size
 bucket_p_2=pygame.transform.scale(imgRoad('bucket_p_2'),(paints_size,paints_size))
 bucket_s_2=pygame.transform.scale(imgRoad('bucket_s_2'),(paints_size,paints_size))
 
+animal_init = ['horse','bird', 'cat']
+animal_flag = 0
+
 mousepos=[]
 animals=[]
 colors=[]
@@ -130,7 +133,6 @@ Y2=0
 while not done:
     clock.tick(10)
 
-    
     for event in pygame.event.get(): 
         if event.type == pygame.QUIT:  
             done = True
@@ -143,7 +145,6 @@ while not done:
                 animal_now='bird'
             elif animal_now=='bird':
                 animal_now='horse'
-
     
     screen.fill((0,0,0))
     
@@ -157,12 +158,14 @@ while not done:
     points = detect.hough_detect(img)
     #points=pygame.mouse.get_pos()
     
-    cv.imshow('result', img)
+    #cv.imshow('result', img)
     # if person head is found
     if type(points) is tuple:
+        points = (points[0]*1.3-181, points[1]*1.3-102)
         pos_now = points
-
-    #spos_now=pygame.mouse.get_pos()
+    elif points is None:
+        animal_flag += 1
+        animal_now = animal_init[flag%3]
 
         # check if user collided to buckets
     if check_collision(bucket_y,pos_now,distance):
@@ -294,7 +297,7 @@ while not done:
 
     if flag==8:
         flag=0
-        
+
     flag+=1
 
     # if user did not touch any bucket yet, no footstep printing
