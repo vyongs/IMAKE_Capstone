@@ -146,6 +146,7 @@ while not done:
 
     
     screen.fill((0,0,0))
+    screen.blit(pygame.image.load('sprites/background.jpg'),(0,0))
     
     pos_prev = pos_now
     # get hand point from video
