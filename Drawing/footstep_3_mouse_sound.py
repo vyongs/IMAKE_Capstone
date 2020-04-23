@@ -42,7 +42,7 @@ def check_spill(bucket_1,bucket_2,paints,spill,bucket,size,color):
         if spill==20:
             spill=0
 
-def imgRoad(name):
+def imgLoad(name):
     return pygame.image.load('sprites/'+name+'.png')
 
 def drawObject(animal, XY, opacity):
@@ -58,26 +58,26 @@ flag=1
 
 # PAINT IMG
 paints_size=80
-paints_y=pygame.transform.scale(imgRoad('paints_y'),(paints_size,paints_size))
-paints_g=pygame.transform.scale(imgRoad('paints_g'),(paints_size,paints_size))
-paints_s=pygame.transform.scale(imgRoad('paints_s'),(paints_size,paints_size))
-paints_p=pygame.transform.scale(imgRoad('paints_p'),(paints_size,paints_size))
-broom_1=pygame.transform.scale(imgRoad('broom1'),(67,116))
-broom_2=pygame.transform.scale(imgRoad('broom2'),(89,143))
+paints_y=pygame.transform.scale(imgLoad('paints_y'),(paints_size,paints_size))
+paints_g=pygame.transform.scale(imgLoad('paints_g'),(paints_size,paints_size))
+paints_s=pygame.transform.scale(imgLoad('paints_s'),(paints_size,paints_size))
+paints_p=pygame.transform.scale(imgLoad('paints_p'),(paints_size,paints_size))
+broom_1=pygame.transform.scale(imgLoad('broom1'),(67,116))
+broom_2=pygame.transform.scale(imgLoad('broom2'),(89,143))
 
-bucket_y_img=pygame.transform.scale(imgRoad('bucket_y'),(paints_size,paints_size))
-bucket_g_img=pygame.transform.scale(imgRoad('bucket_g'),(paints_size,paints_size))
-bucket_p_img=pygame.transform.scale(imgRoad('bucket_p'),(paints_size,paints_size))
-bucket_s_img=pygame.transform.scale(imgRoad('bucket_s'),(paints_size,paints_size))
-bucket_y_3=pygame.transform.scale(imgRoad('bucket_y_3'),(147,paints_size))
-bucket_g_3=pygame.transform.scale(imgRoad('bucket_g_3'),(147,paints_size))
-bucket_p_3=pygame.transform.scale(imgRoad('bucket_p_3'),(147,paints_size))
-bucket_s_3=pygame.transform.scale(imgRoad('bucket_s_3'),(147,paints_size))
+bucket_y_img=pygame.transform.scale(imgLoad('bucket_y'),(paints_size,paints_size))
+bucket_g_img=pygame.transform.scale(imgLoad('bucket_g'),(paints_size,paints_size))
+bucket_p_img=pygame.transform.scale(imgLoad('bucket_p'),(paints_size,paints_size))
+bucket_s_img=pygame.transform.scale(imgLoad('bucket_s'),(paints_size,paints_size))
+bucket_y_3=pygame.transform.scale(imgLoad('bucket_y_3'),(147,paints_size))
+bucket_g_3=pygame.transform.scale(imgLoad('bucket_g_3'),(147,paints_size))
+bucket_p_3=pygame.transform.scale(imgLoad('bucket_p_3'),(147,paints_size))
+bucket_s_3=pygame.transform.scale(imgLoad('bucket_s_3'),(147,paints_size))
 
-bucket_y_2=pygame.transform.scale(imgRoad('bucket_y_2'),(paints_size,paints_size))
-bucket_g_2=pygame.transform.scale(imgRoad('bucket_g_2'),(paints_size,paints_size))
-bucket_p_2=pygame.transform.scale(imgRoad('bucket_p_2'),(paints_size,paints_size))
-bucket_s_2=pygame.transform.scale(imgRoad('bucket_s_2'),(paints_size,paints_size))
+bucket_y_2=pygame.transform.scale(imgLoad('bucket_y_2'),(paints_size,paints_size))
+bucket_g_2=pygame.transform.scale(imgLoad('bucket_g_2'),(paints_size,paints_size))
+bucket_p_2=pygame.transform.scale(imgLoad('bucket_p_2'),(paints_size,paints_size))
+bucket_s_2=pygame.transform.scale(imgLoad('bucket_s_2'),(paints_size,paints_size))
 
 mousepos=[]
 animals=[]
@@ -97,6 +97,9 @@ spill_p=0
 
 #paint time
 time=0
+
+#guide window
+guide_count=0
 
 #color
 YELLOW=(255,255,0)
@@ -146,7 +149,7 @@ while not done:
 
     
     screen.fill((0,0,0))
-    screen.blit(pygame.image.load('sprites/background.jpg'),(0,0))
+    screen.blit(imgLoad('background'),(0,0))
     
     pos_prev = pos_now
     # get hand point from video
@@ -162,6 +165,11 @@ while not done:
     # if person head is found
     if type(points) is tuple:
         pos_now = points
+
+    if points[0]>800 or points[1]>600:
+        guide_count=0
+    else :
+        guide_count+=1
 
     #spos_now=pygame.mouse.get_pos()
 
@@ -286,12 +294,12 @@ while not done:
         X=random.randint(0,40)
         Y=random.randint(0,40)
 
-    screen.blit(imgRoad('blink'+str(flag)),(pos_now[0]-X,pos_now[1]-Y))
+    screen.blit(imgLoad('blink'+str(flag)),(pos_now[0]-X,pos_now[1]-Y))
 
     if flag==4:
         X2=random.randint(0,40)
         Y2=random.randint(0,40)
-    screen.blit(imgRoad('blink'+str(flag-3 if flag>3 else flag+5)),(pos_now[0]-X2,pos_now[1]-Y2))
+    screen.blit(imgLoad('blink'+str(flag-3 if flag>3 else flag+5)),(pos_now[0]-X2,pos_now[1]-Y2))
 
     if flag==8:
         flag=0
@@ -301,9 +309,10 @@ while not done:
 
 
     #guide window blit
-
+    if guide_count>=20:
+        screen.blit(imgLoad('guide_1'),(100,100))
     if (spill_y>0 and spill_y<20) or (spill_s>0 and spill_s<20) or (spill_g>0 and spill_g<20) or (spill_p>0 and spill_p<20):
-        screen.blit(imgRoad('guide_pink'),(100,100))
+        screen.blit(imgLoad('guide_2'),(100,100))
         
 
     # if user did not touch any bucket yet, no footstep printing
@@ -324,7 +333,7 @@ while not done:
     for i in range(len(mousepos)):
         drawObject(animals[i],mousepos[i],opacity[i])
 
-    
+   # print("("+str(points[0])+","+str(points[1])+")") 좌표확인용
     
     pygame.display.update()
     
