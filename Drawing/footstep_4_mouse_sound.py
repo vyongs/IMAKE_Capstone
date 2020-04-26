@@ -45,8 +45,8 @@ flag=1
 
 # IMG LOAD
 background=pygame.transform.scale(imgLoad('background'),(640,480))
-guide1=pygame.transform.scale(imgLoad('guide_1'),(500,120))
-guide2=pygame.transform.scale(imgLoad('guide_2'),(500,120))
+guide1=imgLoad('guide_1')
+guide2=imgLoad('guide_2')
 
 paints_size=80
 paints_y=pygame.transform.scale(imgLoad('paints_y'),(paints_size,paints_size))
@@ -103,12 +103,16 @@ PINK=(255,0,255)
 #coordinate
 bucket_y=(150,100)
 yellow=(220,100)
+
 bucket_g=(100,300)
 green=(170,300)
-bucket_s=(380,500)
-skyblue=(450,500)
-pink=(650,500)
-bucket_p=(580,500)
+
+bucket_s=(380,350)
+skyblue=(450,350)
+
+bucket_p=(530,400)
+pink=(600,400)
+
 broom=(590,100)
 
 distance=40
@@ -212,8 +216,8 @@ while not done:
         spill_y+=1
         if spill_y>20:
             spill_y=0
-            X=random.randint(50,750)
-            Y=random.randint(50,550)
+            X=random.randint(100,580)
+            Y=random.randint(50,400)
             yellow=(X,Y)
             bucket_y=(yellow[0]-70,yellow[1])
     
@@ -227,8 +231,8 @@ while not done:
         spill_g+=1
         if spill_g>20:
             spill_g=0
-            X=random.randint(120,750)
-            Y=random.randint(120,550)
+            X=random.randint(100,580)
+            Y=random.randint(50,400)
             green=(X,Y)
             bucket_g=(green[0]-70,green[1])
     
@@ -242,8 +246,8 @@ while not done:
         spill_s+=1
         if spill_s>20:
             spill_s=0
-            X=random.randint(50,750)
-            Y=random.randint(50,550)
+            X=random.randint(100,580)
+            Y=random.randint(50,400)
             skyblue=(X,Y)
             bucket_s=(skyblue[0]-70,skyblue[1])
     
@@ -257,8 +261,8 @@ while not done:
         spill_p+=1
         if spill_p>20:
             spill_p=0
-            X=random.randint(50,750)
-            Y=random.randint(50,550)
+            X=random.randint(100,580)
+            Y=random.randint(50,400)
             pink=(X,Y)
             bucket_p=(pink[0]-70,pink[1])
 
