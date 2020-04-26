@@ -78,7 +78,7 @@ done=False #done game
 
 color_now=None
 animal_now='cat'
-opacity_now=300
+opacity_now=10
 
 #spill time
 spill_y=0
@@ -91,6 +91,7 @@ time=0
 
 #guide window
 guide_count=0
+guide2_count=0
 
 #color
 YELLOW=(255,255,0)
@@ -157,11 +158,6 @@ while not done:
     # if person head is found
     if type(points) is tuple:
         pos_now = points
-
-    if points[0]>640 or points[1]>480:
-        guide_count=0
-    else :
-        guide_count+=1
 
     #spos_now=pygame.mouse.get_pos()
 
@@ -295,15 +291,26 @@ while not done:
         flag=0
         
     flag+=1
-        
 
+    if opacity_now <= 10:
+        guide_count += 1
+    else:
+        guide_count = 0
+    
     # if user did not touch any bucket yet, no footstep printing
     if color_now is None:
-                #guide window blit
+        #guide window blit
         if guide_count>=20:
             screen.blit(guide1,(100,100))
-        if (spill_y>0 and spill_y<20) or (spill_s>0 and spill_s<20) or (spill_g>0 and spill_g<20) or (spill_p>0 and spill_p<20):
+            if (spill_y>0 and spill_y<20) or (spill_s>0 and spill_s<20) or (spill_g>0 and spill_g<20) or (spill_p>0 and spill_p<20):
+                screen.blit(guide2,(100,100))
+                guide2_count += 1
+        if guide2_count > 0:
             screen.blit(guide2,(100,100))
+            guide2_count += 1
+            if guide2_count >= 15:
+                guide2_count = 0
+                guide_count = 0
         pygame.display.update()
         continue
 
@@ -317,7 +324,18 @@ while not done:
     for i in range(len(mousepos)):
         drawObject(screen, animals[i],mousepos[i],opacity[i])
 
-
+    #guide window blit
+    if guide_count>=20:
+        screen.blit(guide1,(100,100))
+        if (spill_y>0 and spill_y<20) or (spill_s>0 and spill_s<20) or (spill_g>0 and spill_g<20) or (spill_p>0 and spill_p<20):
+            screen.blit(guide2,(100,100))
+            guide2_count += 1
+    if guide2_count > 0:
+        screen.blit(guide2,(100,100))
+        guide2_count += 1
+        if guide2_count >= 15:
+            guide2_count = 0
+            guide_count = 0
 
     pygame.display.update()
     
