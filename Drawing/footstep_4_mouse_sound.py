@@ -133,10 +133,19 @@ while not done:
         elif event.type== pygame.MOUSEBUTTONDOWN:
             if animal_now=='horse':
                 animal_now='cat'
+                sfx1 = pygame.mixer.Sound('sound/cat.ogg')
+                sfx1.set_volume(1)
+                sfx1.play()
             elif animal_now=='cat':
                 animal_now='bird'
+                sfx1 = pygame.mixer.Sound('sound/bird.ogg')
+                sfx1.set_volume(0.5)
+                sfx1.play()
             elif animal_now=='bird':
                 animal_now='horse'
+                sfx1 = pygame.mixer.Sound('sound/horse.ogg')
+                sfx1.set_volume(0.5)
+                sfx1.play()
 
     
     screen.fill((0,0,0))
@@ -194,9 +203,7 @@ while not done:
         if time==30:
             color_now='time_over'
             time=0
-            
-    # broom img
-    screen.blit(broom_1,(broom[0]-int(67/2),broom[1]-int(116/2)))
+             
 
     # draw stand up/spilled paint bucket depending on 'spill_' bool
     if spill_y==0:#YELLO
@@ -268,6 +275,8 @@ while not done:
         sfx1 = pygame.mixer.Sound('sound/erase.ogg')
         sfx1.set_volume(0.5)
         sfx1.play()
+    else :
+        screen.blit(broom_1,(broom[0]-int(67/2),broom[1]-int(116/2)))
         
 
     # user img
@@ -293,7 +302,7 @@ while not done:
                 #guide window blit
         if guide_count>=20:
             screen.blit(guide1,(100,100))
-        if (spill_y>0 and spill_y<20) or (spill_s>0 and spill _s<20) or (spill_g>0 and spill_g<20) or (spill_p>0 and spill_p<20):
+        if (spill_y>0 and spill_y<20) or (spill_s>0 and spill_s<20) or (spill_g>0 and spill_g<20) or (spill_p>0 and spill_p<20):
             screen.blit(guide2,(100,100))
         pygame.display.update()
         continue
@@ -308,11 +317,7 @@ while not done:
     for i in range(len(mousepos)):
         drawObject(screen, animals[i],mousepos[i],opacity[i])
 
-        #guide window blit
-    if guide_count>=20:
-        screen.blit(guide1,(100,100))
-    if (spill_y>0 and spill_y<20) or (spill_s>0 and spill_s<20) or (spill_g>0 and spill_g<20) or (spill_p>0 and spill_p<20):
-        screen.blit(guide2,(100,100))
+
 
     pygame.display.update()
     
