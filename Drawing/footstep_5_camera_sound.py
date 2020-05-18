@@ -4,7 +4,7 @@ import TM as detect
 import cv2 as cv
 import random
 
-cap = cv.VideoCapture(0)
+cap = cv.VideoCapture(1)
 cap.set(3,640)
 cap.set(4,480)
 
@@ -169,7 +169,6 @@ while not done:
     # if person head is found
     if type(points) is tuple:
         pos_now = (points[0]*1.3-60, points[1]*1.3-60)
-        print(pos_now)
 
     # if user goes out of the screen, change animal
     if not(0 < pos_now[0] < 640 and 0 < pos_now[1] < 480): 

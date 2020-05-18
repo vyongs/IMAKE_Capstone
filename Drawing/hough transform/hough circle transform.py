@@ -3,7 +3,7 @@ import cv2 as cv
 
 minDist=50
 
-img_gray = cv.imread('heads.jpg', cv.IMREAD_GRAYSCALE)
+img_gray = cv.imread('head1.jpg', cv.IMREAD_GRAYSCALE)
 img_gray = cv.medianBlur(img_gray,5)
 img_color = cv.cvtColor(img_gray,cv.COLOR_GRAY2BGR)
 

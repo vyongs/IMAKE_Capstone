@@ -26,19 +26,20 @@ def hough_detect(frame):
     gray = cv.medianBlur(gray,5)
     
     circles = cv.HoughCircles(gray,cv.HOUGH_GRADIENT,1,80,param1=50,param2=35,minRadius=0,maxRadius=70)
+    center = None
+    
     if circles is not None:
         for c in circles[0,:]:
-
+            #if frame[int(c[1]),int(c[0])][0]<50 and frame[int(c[1]),int(c[0])][1]<50 and frame[int(c[1]),int(c[0])][2]<50:
             center = (c[0],c[1])
             radius = c[2]
     
-        # 바깥원
+            # 바깥원
             cv.circle(frame,center,radius,(0,255,0),2)
-    
-        # 중심원
+        
+            # 중심원
             cv.circle(frame,center,2,(0,0,255),3)
-    else:
-        center = None
+        
         
     cv.imshow("real-time video", frame)
     
